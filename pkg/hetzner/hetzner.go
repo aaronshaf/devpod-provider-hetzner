@@ -200,7 +200,7 @@ func (h *Hetzner) Create(ctx context.Context, req *hcloud.ServerCreateOpts, disk
 			return err
 		}
 
-		if err := hga.NewWaiter(h.client).Wait(ctx, result.Action, result.NextActions...); err != nil {
+		if err := hga.NewWaiter(h.client, hga.WithTimeout(10*time.Minute)).Wait(ctx, result.Action, result.NextActions...); err != nil {
 			log.Default.Errorf("Error in volume creation action: %s", err)
 			return err
 		}
@@ -234,7 +234,7 @@ func (h *Hetzner) Create(ctx context.Context, req *hcloud.ServerCreateOpts, disk
 
 	log.Default.Info("Server creation triggered")
 
-	if err := hga.NewWaiter(h.client).Wait(ctx, server.Action, server.NextActions...); err != nil {
+	if err := hga.NewWaiter(h.client, hga.WithTimeout(10*time.Minute)).Wait(ctx, server.Action, server.NextActions...); err != nil {
 		log.Default.Errorf("Error in server creation action: %s", err)
 		return err
 	}
@@ -303,7 +303,7 @@ func (h *Hetzner) Delete(ctx context.Context, name string) error {
 		return err
 	}
 
-	return hga.NewWaiter(h.client).Wait(ctx, result.Action)
+	return hga.NewWaiter(h.client, hga.WithTimeout(10*time.Minute)).Wait(ctx, result.Action)
 }
 
 func (h *Hetzner) GetByName(ctx context.Context, name string) (*hcloud.Server, error) {
@@ -370,7 +370,7 @@ func (h *Hetzner) Stop(ctx context.Context, name string) error {
 		return err
 	}
 
-	return hga.NewWaiter(h.client).Wait(ctx, result.Action)
+	return hga.NewWaiter(h.client, hga.WithTimeout(10*time.Minute)).Wait(ctx, result.Action)
 }
 
 func (h *Hetzner) deleteVolume(ctx context.Context, name string) error {
@@ -384,7 +384,7 @@ func (h *Hetzner) deleteVolume(ctx context.Context, name string) error {
 			return errors.Wrap(err, "detach volume")
 		}
 
-		if err := hga.NewWaiter(h.client).Wait(ctx, action); err != nil {
+		if err := hga.NewWaiter(h.client, hga.WithTimeout(10*time.Minute)).Wait(ctx, action); err != nil {
 			log.Default.Errorf("Error in volume detach action: %s, %s", action.Command, err)
 			return err
 		}
