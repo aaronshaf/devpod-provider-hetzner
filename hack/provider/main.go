@@ -205,7 +205,7 @@ fi`,
 				Default:     "/home/devpod/.devpod/agent",
 			},
 		},
-		Agent: provider.ProviderAgentConfig{
+		Agent: provider.ProviderAgentConfig{ //nolint:gosec
 			Path:                    "${AGENT_PATH}",
 			DataPath:                "${AGENT_DATA_PATH}",
 			Timeout:                 "${INACTIVITY_TIMEOUT}",
