@@ -18,7 +18,7 @@ package hetzner
 
 const (
 	labelMachineID           = "machineId"
-	maxServerConnectAttempts = 60
+	maxServerConnectAttempts = 300 // 5 min — allows large snapshot restoration
 	SSHUsername              = "devpod"
 	SSHPort                  = 22
 )
