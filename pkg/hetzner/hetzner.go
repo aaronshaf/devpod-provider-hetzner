@@ -145,7 +145,7 @@ func (h *Hetzner) BuildServerOptions(
 	}
 
 	var image *hcloud.Image
-	if id, err := strconv.Atoi(opts.DiskImage); err == nil {
+	if id, err := strconv.ParseInt(opts.DiskImage, 10, 64); err == nil {
 		// Numeric ID — look up directly (supports snapshots, which have no name)
 		image, _, err = h.client.Image.GetByID(ctx, id)
 		if err != nil {
