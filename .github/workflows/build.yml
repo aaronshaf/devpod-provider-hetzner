@@ -65,7 +65,7 @@ jobs:
       MACHINE_FOLDER: ${{ github.workspace }}./ssh
       MACHINE_TYPE: "cx22"
       REGION: "nbg1"
-      SSH_KEY_PUB: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIK2sB1n570BgGJ3+I0Dgzxhlf9ukc+Hp+C/zsIH4J8Xm vscode@df47ba471beb"
+      SSH_KEY_PUB: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIXoZQ0h8f5BhE7rnLDS+n1YJ7kDS0MYd9u3atUY1hO1 devpod-provider-hetzner-e2e"
       SSH_KEY: ${{ secrets.SSH_KEY }}
     steps:
       - uses: actions/checkout@v4
